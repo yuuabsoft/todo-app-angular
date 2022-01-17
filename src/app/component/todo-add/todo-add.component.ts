@@ -13,6 +13,7 @@ import {Todo}            from "../../model/Todo";
 import {TodoAddInput}    from "../../model/TodoAddInput";
 import {CategoryService} from "../../service/category.service";
 import {Category}        from "../../model/Category";
+import {Router}          from "@angular/router";
 
 @Component({
   selector:    'app-todo-add',
@@ -21,7 +22,7 @@ import {Category}        from "../../model/Category";
 })
 export class TodoAddComponent implements OnInit {
 
-  constructor(private todoService: TodoService, private categoryService: CategoryService, private fb: FormBuilder, private location: Location) {
+  constructor(private todoService: TodoService, private categoryService: CategoryService, private fb: FormBuilder, private location: Location, private router: Router) {
   }
 
   categoryList: Category[] = [];
@@ -57,7 +58,7 @@ export class TodoAddComponent implements OnInit {
       title:      this.todoForm.get("title")?.value,
       body:       this.todoForm.get("body")?.value,
     }
-    this.todoService.addTodo(input).subscribe(() => this.goBack());
+    this.todoService.addTodo(input).subscribe(() => this.router.navigate(['/todo']));
   }
 
   goBack() {

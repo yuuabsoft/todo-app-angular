@@ -13,6 +13,13 @@
     </option>
   </select><br>
 
+  <label for="state-code">ステータス: </label>
+  <select formControlName="stateCode" id="state-code">
+    <option *ngFor="let state of stateList" [value]="state.code">
+      {{ state.name }}
+    </option>
+  </select><br>
+
   <button (click)="goBack()">戻る</button>
-  <button type="submit">作成</button>
+  <button type="submit">更新</button>
 </form>

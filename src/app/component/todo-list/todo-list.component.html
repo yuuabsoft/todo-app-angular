@@ -4,8 +4,8 @@
 </a>
 <ul class="todo-list">
   <li *ngFor="let todo of todoList">
-    <a routerLink="/todo/{{todo.id}}">
-      <span class="badge">{{todo.id}}</span>
+    <a routerLink="/todo/update/{{todo.id}}">
+      <span class="badge">{{todo.stateName}}</span>
       <strong>{{todo.title}}</strong>
       <font color="{{todo.categoryColor}}">&nbsp;#{{todo.categoryName}}</font>
       <p>{{todo.body}}</p>

@@ -1,16 +1,17 @@
-import {Injectable}   from '@angular/core';
+import {Injectable}      from '@angular/core';
 import {
   HttpClient,
   HttpHeaders
-}                     from "@angular/common/http";
+}                        from "@angular/common/http";
 import {
   catchError,
   Observable,
   of,
   tap
-}                     from "rxjs";
-import {Todo}         from "../model/Todo";
-import {TodoAddInput} from "../model/TodoAddInput";
+}                        from "rxjs";
+import {Todo}            from "../model/Todo";
+import {TodoAddInput}    from "../model/TodoAddInput";
+import {TodoUpdateInput} from "../model/TodoUpdateInput";
 
 @Injectable({
   providedIn: 'root'
@@ -37,13 +38,12 @@ export class TodoService {
   }
 
   addTodo(input: TodoAddInput) {
-    console.log(input);
-    console.log(JSON.stringify(input));
     return this.http.post(this.todoUrl, input, this.httpOptions).pipe(catchError(this.handleError('addTodo')));
   }
 
-  updateTodo(todo: Todo) {
-    return this.http.put(this.todoUrl, todo, this.httpOptions).pipe(catchError(this.handleError<any>('updateTodo')));
+  updateTodo(id: number, input: TodoUpdateInput) {
+    const url = `${this.todoUrl}/${id}`;
+    return this.http.put(url, input, this.httpOptions).pipe(catchError(this.handleError<any>('updateTodo')));
   }
 
   deleteTodo(id: number) {

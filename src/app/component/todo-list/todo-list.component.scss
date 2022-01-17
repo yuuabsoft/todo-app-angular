@@ -3,7 +3,7 @@
   margin:          0 0 2em 0;
   list-style-type: none;
   padding:         0;
-  width:           30em;
+  width:           55em;
 }
 
 input {
@@ -63,6 +63,10 @@ input {
   border-radius:    4px 0 0 4px;
 }
 
+.todo-list p {
+  white-space: pre-wrap;
+}
+
 .add-button {
   padding:       .5rem 1.5rem;
   font-size:     1rem;
@@ -76,7 +80,7 @@ input {
 
 button.delete {
   position:         absolute;
-  left:             420px;
+  left:             840px;
   top:              5px;
   background-color: white;
   color:            #525252;
