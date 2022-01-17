@@ -3,8 +3,8 @@ import {
   RouterModule,
   Routes
 }                          from '@angular/router';
-import {TodoListComponent} from "./todo-list/todo-list.component";
-import {TodoAddComponent}  from "./todo-add/todo-add.component";
+import {TodoListComponent} from "./component/todo-list/todo-list.component";
+import {TodoAddComponent}  from "./component/todo-add/todo-add.component";
 
 const routes: Routes = [{
   path:      'todo',

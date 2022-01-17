@@ -9,16 +9,15 @@ import {
   of,
   tap
 }                   from "rxjs";
-import {Todo}       from "./Todo";
+import {Todo}       from "../model/Todo";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
 
-  constructor(
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {
+  }
 
   private todoUrl = 'http://localhost:9000/api/todo';
 
@@ -27,36 +26,25 @@ export class TodoService {
   };
 
   getTodoList(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.todoUrl)
-    .pipe(
-      catchError(this.handleError<Todo[]>('getTodoes', []))
-    )
+    return this.http.get<Todo[]>(this.todoUrl).pipe(catchError(this.handleError<Todo[]>('getTodoes', [])))
   }
 
   getTodo(id: number): Observable<Todo> {
     const url = `${this.todoUrl}/${id}`;
-    return this.http.get<Todo>(url).pipe(
-      catchError(this.handleError<Todo>('getTodo id=${id}', ))
-    );
+    return this.http.get<Todo>(url).pipe(catchError(this.handleError<Todo>('getTodo id=${id}',)));
   }
 
   addTodo(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(this.todoUrl, todo, this.httpOptions).pipe(
-      catchError(this.handleError<Todo>('addTodo'))
-    );
+    return this.http.post<Todo>(this.todoUrl, todo, this.httpOptions).pipe(catchError(this.handleError<Todo>('addTodo')));
   }
 
   updateTodo(todo: Todo) {
-    return this.http.put(this.todoUrl, todo, this.httpOptions).pipe(
-      catchError(this.handleError<any>('updateTodo'))
-    );
+    return this.http.put(this.todoUrl, todo, this.httpOptions).pipe(catchError(this.handleError<any>('updateTodo')));
   }
 
   deleteTodo(id: number): Observable<Todo> {
     const url = `${this.todoUrl}/${id}`;
-    return this.http.delete<Todo>(url, this.httpOptions).pipe(
-      catchError(this.handleError<Todo>('deleteTodo'))
-    );
+    return this.http.delete<Todo>(url, this.httpOptions).pipe(catchError(this.handleError<Todo>('deleteTodo')));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

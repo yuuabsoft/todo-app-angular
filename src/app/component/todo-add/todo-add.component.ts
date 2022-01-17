@@ -2,14 +2,14 @@ import {
   Component,
   OnInit
 }                    from '@angular/core';
-import {TodoService} from "../todo.service";
+import {TodoService} from "../../service/todo.service";
 import {Location}    from "@angular/common";
 import {
   FormBuilder,
   FormControl,
   FormGroup
 }                    from "@angular/forms";
-import {Todo}        from "../Todo";
+import {Todo}        from "../../model/Todo";
 
 @Component({
   selector:    'app-todo-add',
