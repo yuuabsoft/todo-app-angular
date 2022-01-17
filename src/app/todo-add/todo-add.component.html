@@ -1,0 +1,11 @@
+<form [formGroup]="todoForm" (ngSubmit)="save()">
+
+  <label for="title">タイトル: </label>
+  <input id="title" type="text" formControlName="title">
+
+  <label for="body">本文: </label>
+  <textarea id="body" formControlName="body"></textarea>
+
+  <button (click)="goBack()">go back</button>
+  <button type="submit">作成</button>
+</form>

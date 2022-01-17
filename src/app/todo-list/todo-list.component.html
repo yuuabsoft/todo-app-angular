@@ -1,0 +1,11 @@
+<h2>Todoリスト</h2>
+<ul class="todo-list">
+  <li *ngFor="let todo of todoList">
+    <a routerLink="/todo/detail/{{todo.id}}">
+      <span class="badge">{{todo.id}}</span>
+      <strong>{{todo.title}}</strong>
+      <font color="{{todo.categoryColor}}">&nbsp;#{{todo.categoryName}}</font>
+      <p>{{todo.body}}</p>
+    </a>
+  </li>
+</ul>
