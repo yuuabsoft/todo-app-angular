@@ -1,24 +1,25 @@
-import {Injectable}      from '@angular/core';
+import {Injectable}           from '@angular/core';
 import {
   HttpClient,
   HttpHeaders
-}                        from "@angular/common/http";
+}                             from "@angular/common/http";
 import {
   catchError,
   Observable,
   of,
   tap
-}                        from "rxjs";
-import {Todo}            from "../model/Todo";
-import {TodoAddInput}    from "../model/TodoAddInput";
-import {TodoUpdateInput} from "../model/TodoUpdateInput";
+}                             from "rxjs";
+import {Todo}                 from "../model/Todo";
+import {TodoAddInput}         from "../model/TodoAddInput";
+import {TodoUpdateInput}      from "../model/TodoUpdateInput";
+import {FlashMessagesService} from "flash-messages-angular";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private flashMessagesService: FlashMessagesService) {
   }
 
   // TODO: environmentsからhosturlとエントリポイントを取得
@@ -29,26 +30,30 @@ export class TodoService {
   };
 
   getTodoList(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(this.todoUrl).pipe(catchError(this.handleError<Todo[]>('getTodoes', [])))
+    return this.http.get<Todo[]>(this.todoUrl).pipe(catchError(this.handleError<Todo[]>('Todo取得', [])))
   }
 
   getTodo(id: number): Observable<Todo> {
     const url = `${this.todoUrl}/${id}`;
-    return this.http.get<Todo>(url).pipe(catchError(this.handleError<Todo>('getTodo id=${id}',)));
+    return this.http.get<Todo>(url).pipe(catchError(this.handleError<Todo>('Todo取得',)));
   }
 
   addTodo(input: TodoAddInput) {
-    return this.http.post(this.todoUrl, input, this.httpOptions).pipe(catchError(this.handleError('addTodo')));
+    return this.http.post(this.todoUrl, input, this.httpOptions).pipe(tap(_ => this.log("Todoが追加されました")), catchError(this.handleError('Todo追加')));
   }
 
   updateTodo(id: number, input: TodoUpdateInput) {
     const url = `${this.todoUrl}/${id}`;
-    return this.http.put(url, input, this.httpOptions).pipe(catchError(this.handleError<any>('updateTodo')));
+    return this.http.put(url, input, this.httpOptions).pipe(tap(_ => this.log("Todoが更新されました")), catchError(this.handleError<any>('Todo更新')));
   }
 
   deleteTodo(id: number) {
     const url = `${this.todoUrl}/${id}`;
-    return this.http.delete(url, this.httpOptions).pipe(catchError(this.handleError('deleteTodo')));
+    return this.http.delete(url, this.httpOptions).pipe(tap(_ => this.log("Todoが削除されました")), catchError(this.handleError('Todo削除')));
+  }
+
+  private log(msg: string) {
+    this.flashMessagesService.show(msg);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -58,7 +63,7 @@ export class TodoService {
       console.error(error); // かわりにconsoleに出力
 
       // TODO: ユーザーへの開示のためにエラーの変換処理を改善する
-      // this.log(`${operation} failed: ${error.message}`);
+      this.log(`${operation} が失敗しました: ${error.message}`);
 
       // 空の結果を返して、アプリを持続可能にする
       return of(result as T);
