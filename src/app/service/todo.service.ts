@@ -37,6 +37,8 @@ export class TodoService {
   }
 
   addTodo(input: TodoAddInput) {
+    console.log(input);
+    console.log(JSON.stringify(input));
     return this.http.post(this.todoUrl, input, this.httpOptions).pipe(catchError(this.handleError('addTodo')));
   }
 

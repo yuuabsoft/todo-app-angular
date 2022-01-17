@@ -1,4 +1,7 @@
 <h2>Todoリスト</h2>
+<a routerLink="/todo/add">
+  新規作成
+</a>
 <ul class="todo-list">
   <li *ngFor="let todo of todoList">
     <a routerLink="/todo/{{todo.id}}">

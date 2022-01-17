@@ -1,16 +1,18 @@
 import {
   Component,
   OnInit
-}                     from '@angular/core';
-import {TodoService}  from "../../service/todo.service";
-import {Location}     from "@angular/common";
+}                        from '@angular/core';
+import {TodoService}     from "../../service/todo.service";
+import {Location}        from "@angular/common";
 import {
   FormBuilder,
   FormControl,
   FormGroup
-}                     from "@angular/forms";
-import {Todo}         from "../../model/Todo";
-import {TodoAddInput} from "../../model/TodoAddInput";
+}                        from "@angular/forms";
+import {Todo}            from "../../model/Todo";
+import {TodoAddInput}    from "../../model/TodoAddInput";
+import {CategoryService} from "../../service/category.service";
+import {Category}        from "../../model/Category";
 
 @Component({
   selector:    'app-todo-add',
@@ -19,8 +21,10 @@ import {TodoAddInput} from "../../model/TodoAddInput";
 })
 export class TodoAddComponent implements OnInit {
 
-  constructor(private todoService: TodoService, private fb: FormBuilder, private location: Location) {
+  constructor(private todoService: TodoService, private categoryService: CategoryService, private fb: FormBuilder, private location: Location) {
   }
+
+  categoryList: Category[] = [];
 
   todoForm: FormGroup = this.fb.group({
     categoryId: [null],
@@ -29,11 +33,27 @@ export class TodoAddComponent implements OnInit {
   })
 
   ngOnInit() {
+    this.getCategoryList();
+  }
+
+  getCategoryList() {
+    this.categoryService.getCategoryList().subscribe(categoryList => {
+      // カテゴリなしの選択肢を追加
+      // TODO: id=valueを空にするためにCategory.idの定義をnullableにしているので別の実装にしたい
+      categoryList.push({
+        id:        undefined,
+        name:      "なし",
+        slug:      "",
+        colorName: "",
+        colorCode: 0
+      })
+      this.categoryList = categoryList;
+    })
   }
 
   save() {
     const input: TodoAddInput = {
-      categoryId: this.todoForm.get("categoryId")?.value,
+      categoryId: Number(this.todoForm.get("categoryId")?.value),
       title:      this.todoForm.get("title")?.value,
       body:       this.todoForm.get("body")?.value,
     }
