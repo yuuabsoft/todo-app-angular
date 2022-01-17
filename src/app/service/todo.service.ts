@@ -1,15 +1,16 @@
-import {Injectable} from '@angular/core';
+import {Injectable}   from '@angular/core';
 import {
   HttpClient,
   HttpHeaders
-}                   from "@angular/common/http";
+}                     from "@angular/common/http";
 import {
   catchError,
   Observable,
   of,
   tap
-}                   from "rxjs";
-import {Todo}       from "../model/Todo";
+}                     from "rxjs";
+import {Todo}         from "../model/Todo";
+import {TodoAddInput} from "../model/TodoAddInput";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class TodoService {
   constructor(private http: HttpClient) {
   }
 
+  // TODO: environmentsからhosturlとエントリポイントを取得
   private todoUrl = 'http://localhost:9000/api/todo';
 
   private httpOptions = {
@@ -34,17 +36,17 @@ export class TodoService {
     return this.http.get<Todo>(url).pipe(catchError(this.handleError<Todo>('getTodo id=${id}',)));
   }
 
-  addTodo(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(this.todoUrl, todo, this.httpOptions).pipe(catchError(this.handleError<Todo>('addTodo')));
+  addTodo(input: TodoAddInput) {
+    return this.http.post(this.todoUrl, input, this.httpOptions).pipe(catchError(this.handleError('addTodo')));
   }
 
   updateTodo(todo: Todo) {
     return this.http.put(this.todoUrl, todo, this.httpOptions).pipe(catchError(this.handleError<any>('updateTodo')));
   }
 
-  deleteTodo(id: number): Observable<Todo> {
+  deleteTodo(id: number) {
     const url = `${this.todoUrl}/${id}`;
-    return this.http.delete<Todo>(url, this.httpOptions).pipe(catchError(this.handleError<Todo>('deleteTodo')));
+    return this.http.delete(url, this.httpOptions).pipe(catchError(this.handleError('deleteTodo')));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

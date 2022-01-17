@@ -1,15 +1,16 @@
 import {
   Component,
   OnInit
-}                    from '@angular/core';
-import {TodoService} from "../../service/todo.service";
-import {Location}    from "@angular/common";
+}                     from '@angular/core';
+import {TodoService}  from "../../service/todo.service";
+import {Location}     from "@angular/common";
 import {
   FormBuilder,
   FormControl,
   FormGroup
-}                    from "@angular/forms";
-import {Todo}        from "../../model/Todo";
+}                     from "@angular/forms";
+import {Todo}         from "../../model/Todo";
+import {TodoAddInput} from "../../model/TodoAddInput";
 
 @Component({
   selector:    'app-todo-add',
@@ -22,7 +23,7 @@ export class TodoAddComponent implements OnInit {
   }
 
   todoForm: FormGroup = this.fb.group({
-    categoryId: [''],
+    categoryId: [null],
     title:      [''],
     body:       [''],
   })
@@ -31,6 +32,12 @@ export class TodoAddComponent implements OnInit {
   }
 
   save() {
+    const input: TodoAddInput = {
+      categoryId: this.todoForm.get("categoryId")?.value,
+      title:      this.todoForm.get("title")?.value,
+      body:       this.todoForm.get("body")?.value,
+    }
+    this.todoService.addTodo(input).subscribe(() => this.goBack());
   }
 
   goBack() {
