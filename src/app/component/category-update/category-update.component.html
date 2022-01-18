@@ -14,6 +14,9 @@
     <div *ngIf="slugForm?.errors?.['required']">
       スラッグが入力されていません。
     </div>
+    <div *ngIf="slugForm?.errors?.['pattern']">
+      スラッグは半角英数字で入力してください。
+    </div>
   </div>
 
   <label for="color-code">カラー: </label>

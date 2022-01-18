@@ -42,7 +42,7 @@ export class CategoryUpdateComponent implements OnInit {
 
   categoryForm: FormGroup = this.fb.group({
     name:      [undefined, [Validators.required]],
-    slug:      [undefined, [Validators.required]],
+    slug:      [undefined, [Validators.required, Validators.pattern("[a-zA-Z0-9 ]+")]],
     colorCode: [undefined, [Validators.required]],
   })
 
