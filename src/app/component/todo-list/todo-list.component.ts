@@ -28,7 +28,7 @@ export class TodoListComponent implements OnInit {
     })
   }
 
-  delete(todo: Todo): void {
+  delete(todo: Todo) {
     this.todoService.deleteTodo(todo.id).subscribe(() => this.getTodoList());
   }
 }

@@ -55,11 +55,11 @@ export class TodoUpdateComponent implements OnInit {
     this.getCategoryList();
   }
 
-  getTodo(): void {
+  getTodo() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.todoService.getTodo(id).subscribe(todo => {
       this.todo = todo;
-      this.todoForm.patchValue(todo)
+      this.todoForm.patchValue(todo);
     });
   }
 

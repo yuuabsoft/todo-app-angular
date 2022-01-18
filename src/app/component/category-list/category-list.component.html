@@ -1,0 +1,16 @@
+<h2>カテゴリリスト</h2>
+<a routerLink="/category/add">
+  新規作成
+</a>
+<ul class="category-list">
+  <li *ngFor="let category of categoryList">
+    <a routerLink="/category/update/{{category.id}}">
+      <span class="badge">{{category.id}}</span>
+      <font color="{{category.colorName}}">&nbsp;#{{category.name}}</font>
+      &nbsp;{{category.slug}}
+    </a>
+    <button class="delete" title="delete category"
+            (click)="delete(category)">x
+    </button>
+  </li>
+</ul>

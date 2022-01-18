@@ -1,0 +1,18 @@
+<form [formGroup]="categoryForm" (ngSubmit)="save()">
+
+  <label for="name">カテゴリ名: </label>
+  <input id="name" type="text" formControlName="name"><br>
+
+  <label for="slug">スラッグ: </label>
+  <input id="slug" formControlName="slug"><br>
+
+  <label for="color-code">カラー: </label>
+  <select formControlName="colorCode" id="color-code">
+    <option *ngFor="let color of colorList" [value]="color.code">
+      {{ color.name }}
+    </option>
+  </select><br>
+
+  <button (click)="goBack()">戻る</button>
+  <button type="submit">作成</button>
+</form>
