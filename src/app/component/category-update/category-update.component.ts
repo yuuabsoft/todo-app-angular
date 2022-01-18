@@ -5,7 +5,8 @@ import {
 import {CategoryService}     from "../../service/category.service";
 import {
   FormBuilder,
-  FormGroup
+  FormGroup,
+  Validators
 }                            from "@angular/forms";
 import {Location}            from "@angular/common";
 import {
@@ -40,9 +41,9 @@ export class CategoryUpdateComponent implements OnInit {
   },];
 
   categoryForm: FormGroup = this.fb.group({
-    name:      [],
-    slug:      [],
-    colorCode: [],
+    name:      [undefined, [Validators.required]],
+    slug:      [undefined, [Validators.required]],
+    colorCode: [undefined, [Validators.required]],
   })
 
   ngOnInit() {
@@ -69,5 +70,17 @@ export class CategoryUpdateComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  get nameForm() {
+    return this.categoryForm.get("name");
+  }
+
+  get slugForm() {
+    return this.categoryForm.get("slug");
+  }
+
+  get colorCodeForm() {
+    return this.categoryForm.get("colorCode");
   }
 }

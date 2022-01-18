@@ -2,9 +2,19 @@
 
   <label for="title">タイトル: </label>
   <input id="title" type="text" formControlName="title"><br>
+  <div *ngIf="titleForm?.invalid && (titleForm?.dirty || titleForm?.touched)">
+    <div *ngIf="titleForm?.errors?.['required']">
+      タイトルが入力されていません。
+    </div>
+  </div>
 
   <label for="body">本文: </label>
   <textarea id="body" formControlName="body"></textarea><br>
+  <div *ngIf="bodyForm?.invalid && (bodyForm?.dirty || bodyForm?.touched)">
+    <div *ngIf="bodyForm?.errors?.['required']">
+      本文が入力されていません。
+    </div>
+  </div>
 
   <label for="category-id">カテゴリ: </label>
   <select formControlName="categoryId" id="category-id">
@@ -13,6 +23,11 @@
     </option>
     <option value=undefined>なし</option>
   </select><br>
+  <div *ngIf="categoryIdForm?.invalid && (categoryIdForm?.dirty || categoryIdForm?.touched)">
+    <div *ngIf="categoryIdForm?.errors?.['required']">
+      カテゴリが選択されていません。
+    </div>
+  </div>
 
   <label for="state-code">ステータス: </label>
   <select formControlName="stateCode" id="state-code">
@@ -20,7 +35,12 @@
       {{ state.name }}
     </option>
   </select><br>
+  <div *ngIf="stateCodeForm?.invalid && (stateCodeForm?.dirty || stateCodeForm?.touched)">
+    <div *ngIf="stateCodeForm?.errors?.['required']">
+      ステータスが選択されていません。
+    </div>
+  </div>
 
   <button (click)="goBack()">戻る</button>
-  <button type="submit">更新</button>
+  <button type="submit" [disabled]="!todoForm.valid">更新</button>
 </form>

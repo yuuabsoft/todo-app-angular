@@ -2,9 +2,19 @@
 
   <label for="name">カテゴリ名: </label>
   <input id="name" type="text" formControlName="name"><br>
+  <div *ngIf="nameForm?.invalid && (nameForm?.dirty || nameForm?.touched)">
+    <div *ngIf="nameForm?.errors?.['required']">
+      カテゴリ名が入力されていません。
+    </div>
+  </div>
 
   <label for="slug">スラッグ: </label>
   <input id="slug" formControlName="slug"><br>
+  <div *ngIf="slugForm?.invalid && (slugForm?.dirty || slugForm?.touched)">
+    <div *ngIf="slugForm?.errors?.['required']">
+      スラッグが入力されていません。
+    </div>
+  </div>
 
   <label for="color-code">カラー: </label>
   <select formControlName="colorCode" id="color-code">
@@ -12,7 +22,12 @@
       {{ color.name }}
     </option>
   </select><br>
+  <div *ngIf="colorCodeForm?.invalid && (colorCodeForm?.dirty || colorCodeForm?.touched)">
+    <div *ngIf="colorCodeForm?.errors?.['required']">
+      カラーが選択されていません。
+    </div>
+  </div>
 
   <button (click)="goBack()">戻る</button>
-  <button type="submit">作成</button>
+  <button type="submit" [disabled]="!categoryForm.valid">作成</button>
 </form>

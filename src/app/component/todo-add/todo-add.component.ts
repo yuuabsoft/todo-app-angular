@@ -7,7 +7,8 @@ import {Location}        from "@angular/common";
 import {
   FormBuilder,
   FormControl,
-  FormGroup
+  FormGroup,
+  Validators
 }                        from "@angular/forms";
 import {Todo}            from "../../model/Todo";
 import {TodoAddInput}    from "../../model/TodoAddInput";
@@ -28,9 +29,9 @@ export class TodoAddComponent implements OnInit {
   categoryList: Category[] = [];
 
   todoForm: FormGroup = this.fb.group({
-    categoryId: [undefined],
-    title:      [],
-    body:       [],
+    categoryId: [undefined, [Validators.required]],
+    title:      [undefined, [Validators.required]],
+    body:       [undefined, [Validators.required]],
   })
 
   ngOnInit() {
@@ -54,5 +55,17 @@ export class TodoAddComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  get categoryIdForm() {
+    return this.todoForm.get("categoryId");
+  }
+
+  get titleForm() {
+    return this.todoForm.get("title");
+  }
+
+  get bodyForm() {
+    return this.todoForm.get("body");
   }
 }

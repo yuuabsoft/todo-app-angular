@@ -6,7 +6,8 @@ import {TodoService}     from "../../service/todo.service";
 import {CategoryService} from "../../service/category.service";
 import {
   FormBuilder,
-  FormGroup
+  FormGroup,
+  Validators
 }                        from "@angular/forms";
 import {Location}        from "@angular/common";
 import {Category}        from "../../model/Category";
@@ -44,10 +45,10 @@ export class TodoUpdateComponent implements OnInit {
   },];
 
   todoForm: FormGroup = this.fb.group({
-    categoryId: [undefined],
-    title:      [],
-    body:       [],
-    stateCode:  [],
+    categoryId: [undefined, [Validators.required]],
+    title:      [undefined, [Validators.required]],
+    body:       [undefined, [Validators.required]],
+    stateCode:  [undefined, [Validators.required]],
   })
 
   ngOnInit() {
@@ -86,4 +87,19 @@ export class TodoUpdateComponent implements OnInit {
     this.location.back();
   }
 
+  get categoryIdForm() {
+    return this.todoForm.get("categoryId");
+  }
+
+  get titleForm() {
+    return this.todoForm.get("title");
+  }
+
+  get bodyForm() {
+    return this.todoForm.get("body");
+  }
+
+  get stateCodeForm() {
+    return this.todoForm.get("stateCode");
+  }
 }
