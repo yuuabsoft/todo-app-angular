@@ -7,7 +7,7 @@
     <a routerLink="/todo/update/{{todo.id}}">
       <span class="badge">{{todo.stateName}}</span>
       <strong>{{todo.title}}</strong>
-      <font color="{{todo.categoryColor}}">&nbsp;#{{todo.categoryName}}</font>
+      <font *ngIf="todo.category" color="{{todo.category.colorName}}">&nbsp;#{{todo.category.name}}</font>
       <p>{{todo.body}}</p>
     </a>
     <button class="delete" title="delete todo"

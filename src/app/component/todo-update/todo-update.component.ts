@@ -61,6 +61,8 @@ export class TodoUpdateComponent implements OnInit {
     this.todoService.getTodo(id).subscribe(todo => {
       this.todo = todo;
       this.todoForm.patchValue(todo);
+      // カテゴリが入れ子になっているため個別にセット
+      this.todoForm.patchValue({categoryId: todo.category?.id});
     });
   }
 

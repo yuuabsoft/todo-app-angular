@@ -1,8 +1,8 @@
 export interface Todo {
   id: number;
-  categoryId?: number;
-  categoryName?: string;
-  categoryColor?: string;
+  category?: {
+    id: number; name: string; slug: string; colorCode: number; colorName: string;
+  }
   title: string;
   body: string;
   stateCode: number;
