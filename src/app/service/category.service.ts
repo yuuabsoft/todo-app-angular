@@ -13,6 +13,7 @@ import {Category}             from "../model/Category";
 import {FlashMessagesService} from "flash-messages-angular";
 import {CategoryAddInput}     from "../model/CategoryAddInput";
 import {CategoryUpdateInput}  from "../model/CategoryUpdateInput";
+import {environment}          from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,7 @@ export class CategoryService {
   constructor(private http: HttpClient, private flashMessagesService: FlashMessagesService) {
   }
 
-  // TODO: environmentsからhosturlとエントリポイントを取得
-  private categoryUrl = 'http://localhost:9000/api/category';
+  private categoryUrl = environment.apiUrl + '/api/category';
 
   private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

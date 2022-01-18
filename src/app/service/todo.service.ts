@@ -13,6 +13,7 @@ import {Todo}                 from "../model/Todo";
 import {TodoAddInput}         from "../model/TodoAddInput";
 import {TodoUpdateInput}      from "../model/TodoUpdateInput";
 import {FlashMessagesService} from "flash-messages-angular";
+import {environment}          from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,7 @@ export class TodoService {
   constructor(private http: HttpClient, private flashMessagesService: FlashMessagesService) {
   }
 
-  // TODO: environmentsからhosturlとエントリポイントを取得
-  private todoUrl = 'http://localhost:9000/api/todo';
+  private todoUrl = environment.apiUrl + '/api/todo';
 
   private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
