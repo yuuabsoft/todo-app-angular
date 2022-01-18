@@ -11,6 +11,7 @@
     <option *ngFor="let category of categoryList" [value]="category.id">
       {{ category.name }}
     </option>
+    <option value=undefined>なし</option>
   </select><br>
 
   <label for="state-code">ステータス: </label>

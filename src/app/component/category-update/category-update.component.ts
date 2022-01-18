@@ -58,7 +58,7 @@ export class CategoryUpdateComponent implements OnInit {
   }
 
   save() {
-    if (!this.category || !this.category.id) return;
+    if (!this.category) return;
     const input: CategoryUpdateInput = {
       name:      this.categoryForm.get("name")?.value,
       slug:      this.categoryForm.get("slug")?.value,

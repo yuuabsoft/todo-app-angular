@@ -28,9 +28,9 @@ export class TodoAddComponent implements OnInit {
   categoryList: Category[] = [];
 
   todoForm: FormGroup = this.fb.group({
-    categoryId: [null],
-    title:      [''],
-    body:       [''],
+    categoryId: [undefined],
+    title:      [],
+    body:       [],
   })
 
   ngOnInit() {
@@ -39,15 +39,6 @@ export class TodoAddComponent implements OnInit {
 
   getCategoryList() {
     this.categoryService.getCategoryList().subscribe(categoryList => {
-      // カテゴリなしの選択肢を追加
-      // TODO: id=valueを空にするためにCategory.idの定義をnullableにしているので別の実装にしたい
-      categoryList.push({
-        id:        undefined,
-        name:      "なし",
-        slug:      "",
-        colorName: "",
-        colorCode: 0
-      })
       this.categoryList = categoryList;
     })
   }

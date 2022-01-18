@@ -44,7 +44,7 @@ export class TodoUpdateComponent implements OnInit {
   },];
 
   todoForm: FormGroup = this.fb.group({
-    categoryId: [],
+    categoryId: [undefined],
     title:      [],
     body:       [],
     stateCode:  [],
@@ -65,15 +65,6 @@ export class TodoUpdateComponent implements OnInit {
 
   getCategoryList() {
     this.categoryService.getCategoryList().subscribe(categoryList => {
-      // カテゴリなしの選択肢を追加
-      // TODO: id=valueを空にするためにCategory.idの定義をnullableにしているので別の実装にしたい
-      categoryList.push({
-        id:        undefined,
-        name:      "なし",
-        slug:      "",
-        colorName: "",
-        colorCode: 0
-      })
       this.categoryList = categoryList;
     })
   }

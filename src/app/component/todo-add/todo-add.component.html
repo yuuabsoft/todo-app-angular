@@ -11,6 +11,7 @@
     <option *ngFor="let category of categoryList" [value]="category.id">
       {{ category.name }}
     </option>
+    <option value=undefined>なし</option>
   </select><br>
 
   <button (click)="goBack()">戻る</button>
