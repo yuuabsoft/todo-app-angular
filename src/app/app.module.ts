@@ -8,20 +8,19 @@ import {
   FormsModule,
   ReactiveFormsModule
 }                                from "@angular/forms";
-import {
-  HttpClient,
-  HttpClientModule
-}                                from "@angular/common/http";
+import {HttpClientModule}        from "@angular/common/http";
 import {TodoAddComponent}        from './component/todo-add/todo-add.component';
 import {TodoUpdateComponent}     from './component/todo-update/todo-update.component';
 import {FlashMessagesModule}     from "flash-messages-angular";
 import {CategoryListComponent}   from './component/category-list/category-list.component';
 import {CategoryAddComponent}    from './component/category-add/category-add.component';
 import {CategoryUpdateComponent} from './component/category-update/category-update.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatTabsModule}           from "@angular/material/tabs";
 
 @NgModule({
   declarations: [AppComponent, TodoListComponent, TodoAddComponent, TodoUpdateComponent, CategoryListComponent, CategoryAddComponent, CategoryUpdateComponent],
-  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot()],
+  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot(), BrowserAnimationsModule, MatTabsModule],
   providers:    [],
   bootstrap:    [AppComponent]
 })
