@@ -25,10 +25,11 @@ import {MatToolbarModule}        from "@angular/material/toolbar";
 import {MatFormFieldModule}      from "@angular/material/form-field";
 import {MatInputModule}          from "@angular/material/input";
 import {MatSelectModule}         from "@angular/material/select";
+import {MatTableModule}          from "@angular/material/table";
 
 @NgModule({
   declarations: [AppComponent, TodoListComponent, TodoAddComponent, TodoUpdateComponent, CategoryListComponent, CategoryAddComponent, CategoryUpdateComponent],
-  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot(), BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatSelectModule],
+  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot(), BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule],
   providers:    [],
   bootstrap:    [AppComponent]
 })

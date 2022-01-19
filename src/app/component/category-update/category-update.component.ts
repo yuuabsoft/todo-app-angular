@@ -83,4 +83,28 @@ export class CategoryUpdateComponent implements OnInit {
   get colorCodeForm() {
     return this.categoryForm.get("colorCode");
   }
+
+  get nameErrorMessage() {
+    if (this.nameForm?.hasError('required')) {
+      return 'カテゴリ名が入力されていません。';
+    }
+    return '';
+  }
+
+  get slugErrorMessage() {
+    if (this.slugForm?.hasError('required')) {
+      return 'slugが入力されていません。';
+    }
+    if (this.slugForm?.hasError('pattern')) {
+      return 'slugは半角英数字で入力してください。';
+    }
+    return '';
+  }
+
+  get colorCodeErrorMessage() {
+    if (this.colorCodeForm?.hasError('required')) {
+      return 'カラーが入力されていません。';
+    }
+    return '';
+  }
 }

@@ -1,16 +1,37 @@
-<h2>カテゴリリスト</h2>
-<a routerLink="/category/add">
-  新規作成
-</a>
-<ul class="category-list">
-  <li *ngFor="let category of categoryList">
-    <a routerLink="/category/update/{{category.id}}">
-      <span class="badge">{{category.id}}</span>
-      <font color="{{category.colorName}}">&nbsp;#{{category.name}}</font>
-      &nbsp;{{category.slug}}
-    </a>
-    <button class="delete" title="delete category"
-            (click)="delete(category)">x
-    </button>
-  </li>
-</ul>
+<section class="title-group">
+  <h1>カテゴリリスト</h1>
+  <mat-divider></mat-divider>
+</section>
+<div align="end" class="add-button">
+  <a mat-raised-button color="accent" routerLink="/category/add">新規作成</a><br>
+</div>
+
+<table mat-table [dataSource]="categoryList" class="category-list">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>id</th>
+    <td mat-cell *matCellDef="let category">{{category.id}}</td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>カテゴリ名</th>
+    <td mat-cell *matCellDef="let category">
+      <mat-chip-list>
+        <mat-chip style="background-color:{{category.colorName}};color:white;">
+          {{category.name}}</mat-chip>
+      </mat-chip-list>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="slug">
+    <th mat-header-cell *matHeaderCellDef>slug</th>
+    <td mat-cell *matCellDef="let category">{{category.slug}}</td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let category" align="end">
+      <a mat-raised-button routerLink="/category/update/{{category.id}}" class="delete-button">編集</a>
+      <button mat-raised-button (click)="delete(category)" color="warn">削除</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'name', 'slug', 'action']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'slug', 'action'];"></tr>
+</table>

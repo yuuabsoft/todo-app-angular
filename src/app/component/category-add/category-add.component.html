@@ -1,36 +1,44 @@
-<form [formGroup]="categoryForm" (ngSubmit)="save()">
+<section class="title-group">
+  <h1>カテゴリ新規作成</h1>
+  <mat-divider></mat-divider>
+</section>
 
-  <label for="name">カテゴリ名: </label>
-  <input id="name" type="text" formControlName="name"><br>
-  <div *ngIf="nameForm?.invalid && (nameForm?.dirty || nameForm?.touched)">
-    <div *ngIf="nameForm?.errors?.['required']">
-      カテゴリ名が入力されていません。
-    </div>
-  </div>
+<form [formGroup]="categoryForm" (ngSubmit)="save()" class="add-form">
 
-  <label for="slug">スラッグ: </label>
-  <input id="slug" formControlName="slug"><br>
-  <div *ngIf="slugForm?.invalid && (slugForm?.dirty || slugForm?.touched)">
-    <div *ngIf="slugForm?.errors?.['required']">
-      スラッグが入力されていません。
-    </div>
-    <div *ngIf="slugForm?.errors?.['pattern']">
-      スラッグは半角英数字で入力してください。
-    </div>
-  </div>
+  <p>
+    <mat-form-field class="name-form" appearance="fill">
+      <mat-label>カテゴリ名</mat-label>
+      <input matInput id="name" formControlName="name">
+      <mat-error *ngIf="nameForm?.invalid">
+        {{nameErrorMessage}}
+      </mat-error>
+    </mat-form-field>
+  </p>
 
-  <label for="color-code">カラー: </label>
-  <select formControlName="colorCode" id="color-code">
-    <option *ngFor="let color of colorList" [value]="color.code">
-      {{ color.name }}
-    </option>
-  </select><br>
-  <div *ngIf="colorCodeForm?.invalid && (colorCodeForm?.dirty || colorCodeForm?.touched)">
-    <div *ngIf="colorCodeForm?.errors?.['required']">
-      カラーが選択されていません。
-    </div>
-  </div>
+  <p>
+    <mat-form-field class="slug-form" appearance="fill">
+      <mat-label>slug</mat-label>
+      <input matInput id="slug" formControlName="slug">
+      <mat-error *ngIf="slugForm?.invalid">
+        {{slugErrorMessage}}
+      </mat-error>
+    </mat-form-field>
+  </p>
 
-  <button (click)="goBack()">戻る</button>
-  <button type="submit" [disabled]="!categoryForm.valid">作成</button>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>カラー</mat-label>
+      <mat-select formControlName="colorCode" id="color-code">
+        <mat-option *ngFor="let color of colorList" [value]="color.code">
+          {{ color.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="colorCodeForm?.invalid">
+        {{colorCodeErrorMessage}}
+      </mat-error>
+    </mat-form-field>
+  </p>
+
+  <button mat-raised-button (click)="goBack()">戻る</button>
+  <button mat-raised-button color="accent" type="submit" [disabled]="!categoryForm.valid">作成</button>
 </form>
