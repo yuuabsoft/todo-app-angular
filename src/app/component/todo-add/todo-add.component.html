@@ -1,34 +1,45 @@
-<form [formGroup]="todoForm" (ngSubmit)="save()">
+<section class="title-group">
+  <h1>Todo新規作成</h1>
+  <mat-divider></mat-divider>
+</section>
 
-  <label for="title">タイトル: </label>
-  <input id="title" type="text" formControlName="title"><br>
-  <div *ngIf="titleForm?.invalid && (titleForm?.dirty || titleForm?.touched)">
-    <div *ngIf="titleForm?.errors?.['required']">
-      タイトルが入力されていません。
-    </div>
-  </div>
+<form [formGroup]="todoForm" (ngSubmit)="save()" class="add-form">
 
-  <label for="body">本文: </label>
-  <textarea id="body" formControlName="body"></textarea><br>
-  <div *ngIf="bodyForm?.invalid && (bodyForm?.dirty || bodyForm?.touched)">
-    <div *ngIf="bodyForm?.errors?.['required']">
-      本文が入力されていません。
-    </div>
-  </div>
+  <p>
+    <mat-form-field class="title-form" appearance="fill">
+      <mat-label>タイトル</mat-label>
+      <input matInput id="title" formControlName="title">
+      <mat-error *ngIf="titleForm?.invalid">
+        {{titleErrorMessage}}
+      </mat-error>
+    </mat-form-field>
+  </p>
 
-  <label for="category-id">カテゴリ: </label>
-  <select formControlName="categoryId" id="category-id">
-    <option *ngFor="let category of categoryList" [value]="category.id">
-      {{ category.name }}
-    </option>
-    <option value=undefined>なし</option>
-  </select><br>
-  <div *ngIf="categoryIdForm?.invalid && (categoryIdForm?.dirty || categoryIdForm?.touched)">
-    <div *ngIf="categoryIdForm?.errors?.['required']">
-      カテゴリが選択されていません。
-    </div>
-  </div>
+  <p>
+    <mat-form-field class="body-form" appearance="fill">
+      <mat-label>本文</mat-label>
+      <textarea matInput id="body" rows="4" formControlName="body"></textarea>
+      <mat-error *ngIf="bodyForm?.invalid">
+        {{bodyErrorMessage}}
+      </mat-error>
+    </mat-form-field>
+  </p>
 
-  <button (click)="goBack()">戻る</button>
-  <button type="submit" [disabled]="!todoForm.valid">作成</button>
+  <p>
+    <mat-form-field appearance="fill">
+      <mat-label>カテゴリ</mat-label>
+      <mat-select formControlName="categoryId" id="category-id">
+        <mat-option *ngFor="let category of categoryList" [value]="category.id">
+          {{ category.name }}
+        </mat-option>
+        <mat-option value=undefined>なし</mat-option>
+      </mat-select>
+      <mat-error *ngIf="categoryIdForm?.invalid">
+        {{categoryIdErrorMessage}}
+      </mat-error>
+    </mat-form-field>
+  </p>
+
+  <button mat-raised-button (click)="goBack()">戻る</button>
+  <button mat-raised-button color="accent" type="submit" [disabled]="!todoForm.valid">作成</button>
 </form>

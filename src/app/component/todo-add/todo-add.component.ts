@@ -6,11 +6,9 @@ import {TodoService}     from "../../service/todo.service";
 import {Location}        from "@angular/common";
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators
 }                        from "@angular/forms";
-import {Todo}            from "../../model/Todo";
 import {TodoAddInput}    from "../../model/TodoAddInput";
 import {CategoryService} from "../../service/category.service";
 import {Category}        from "../../model/Category";
@@ -67,5 +65,26 @@ export class TodoAddComponent implements OnInit {
 
   get bodyForm() {
     return this.todoForm.get("body");
+  }
+
+  get categoryIdErrorMessage() {
+    if (this.categoryIdForm?.hasError('required')) {
+      return 'カテゴリが選択されていません。';
+    }
+    return '';
+  }
+
+  get titleErrorMessage() {
+    if (this.titleForm?.hasError('required')) {
+      return 'タイトルが入力されていません。';
+    }
+    return '';
+  }
+
+  get bodyErrorMessage() {
+    if (this.bodyForm?.hasError('required')) {
+      return '本文が入力されていません。';
+    }
+    return '';
   }
 }

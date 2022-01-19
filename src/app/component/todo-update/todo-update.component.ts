@@ -104,4 +104,32 @@ export class TodoUpdateComponent implements OnInit {
   get stateCodeForm() {
     return this.todoForm.get("stateCode");
   }
+
+  get categoryIdErrorMessage() {
+    if (this.categoryIdForm?.hasError('required')) {
+      return 'カテゴリが選択されていません。';
+    }
+    return '';
+  }
+
+  get titleErrorMessage() {
+    if (this.titleForm?.hasError('required')) {
+      return 'タイトルが入力されていません。';
+    }
+    return '';
+  }
+
+  get bodyErrorMessage() {
+    if (this.bodyForm?.hasError('required')) {
+      return '本文が入力されていません。';
+    }
+    return '';
+  }
+
+  get stateCodeErrorMessage() {
+    if (this.stateCodeForm?.hasError('required')) {
+      return 'ステータスが選択されていません。';
+    }
+    return '';
+  }
 }

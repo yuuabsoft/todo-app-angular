@@ -22,10 +22,13 @@ import {MatButtonModule}         from "@angular/material/button";
 import {MatChipsModule}          from "@angular/material/chips";
 import {MatDividerModule}        from "@angular/material/divider";
 import {MatToolbarModule}        from "@angular/material/toolbar";
+import {MatFormFieldModule}      from "@angular/material/form-field";
+import {MatInputModule}          from "@angular/material/input";
+import {MatSelectModule}         from "@angular/material/select";
 
 @NgModule({
   declarations: [AppComponent, TodoListComponent, TodoAddComponent, TodoUpdateComponent, CategoryListComponent, CategoryAddComponent, CategoryUpdateComponent],
-  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot(), BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule],
+  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot(), BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatSelectModule],
   providers:    [],
   bootstrap:    [AppComponent]
 })
