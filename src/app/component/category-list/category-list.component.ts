@@ -1,9 +1,11 @@
 import {
   Component,
   OnInit
-}                        from '@angular/core';
-import {CategoryService} from "../../service/category.service";
-import {Category}        from "../../model/Category";
+}                               from '@angular/core';
+import {CategoryService}        from "../../service/category.service";
+import {Category}               from "../../model/Category";
+import {MatDialog}              from "@angular/material/dialog";
+import {DefaultDialogComponent} from "../default-dialog/default-dialog.component";
 
 @Component({
   selector:    'app-category-list',
@@ -14,7 +16,7 @@ export class CategoryListComponent implements OnInit {
 
   categoryList: Category[] = [];
 
-  constructor(private categoryService: CategoryService) {
+  constructor(private categoryService: CategoryService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -28,7 +30,12 @@ export class CategoryListComponent implements OnInit {
   }
 
   delete(category: Category) {
-    if (category.id == undefined) return;
-    this.categoryService.deleteCategory(category.id).subscribe(() => this.getCategoryList());
+    let dialog = this.dialog.open(DefaultDialogComponent, {
+      width: '250px',
+      data:  {title: "カテゴリを削除しますか？"}
+    });
+    dialog.afterClosed().subscribe((result) => {
+      if (result) this.categoryService.deleteCategory(category.id).subscribe(() => this.getCategoryList());
+    })
   }
 }

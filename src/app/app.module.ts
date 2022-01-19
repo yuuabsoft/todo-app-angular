@@ -29,10 +29,12 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule
 }                                from "@angular/material/snack-bar";
+import {DefaultDialogComponent}  from './component/default-dialog/default-dialog.component';
+import {MatDialogModule}         from "@angular/material/dialog";
 
 @NgModule({
-  declarations: [AppComponent, TodoListComponent, TodoAddComponent, TodoUpdateComponent, CategoryListComponent, CategoryAddComponent, CategoryUpdateComponent],
-  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule, MatSnackBarModule],
+  declarations: [AppComponent, TodoListComponent, TodoAddComponent, TodoUpdateComponent, CategoryListComponent, CategoryAddComponent, CategoryUpdateComponent, DefaultDialogComponent],
+  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule, MatSnackBarModule, MatDialogModule],
   providers:    [{
     provide:  MAT_SNACK_BAR_DEFAULT_OPTIONS,
     useValue: {duration: 2000}
