@@ -1,7 +1,13 @@
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/todo">Todoリスト</a>|
-  <a routerLink="/category">カテゴリリスト</a>
-</nav>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>{{title}}</span>
+    <span>
+      <a mat-button routerLink="/todo" class="header-button">Todoリスト</a>
+    </span>
+    <span>
+      <a mat-button routerLink="/category" class="header-button">カテゴリリスト</a>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
 <flash-messages></flash-messages>
 <router-outlet></router-outlet>

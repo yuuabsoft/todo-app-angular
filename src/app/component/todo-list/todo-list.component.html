@@ -1,17 +1,26 @@
-<h2>Todoリスト</h2>
-<a routerLink="/todo/add">
-  新規作成
-</a>
-<ul class="todo-list">
-  <li *ngFor="let todo of todoList">
-    <a routerLink="/todo/update/{{todo.id}}">
-      <span class="badge">{{todo.stateName}}</span>
-      <strong>{{todo.title}}</strong>
-      <font *ngIf="todo.category" color="{{todo.category.colorName}}">&nbsp;#{{todo.category.name}}</font>
+<section class="title-group">
+  <h1>Todoリスト</h1>
+  <mat-divider></mat-divider>
+</section>
+<div align="end" class="add-button">
+  <a mat-raised-button color="accent" routerLink="/todo/add">新規作成</a><br>
+</div>
+<section class="todo-list">
+  <div *ngFor="let todo of todoList">
+    <mat-card>
+      <mat-card-title>{{todo.title}}</mat-card-title>
+      <mat-chip-list style="float:right">
+        <mat-chip *ngIf="todo.category"
+                  style="background-color:{{todo.category.colorName}};color:white;">
+          {{todo.category.name}}</mat-chip>
+      </mat-chip-list>
+      <mat-card-subtitle>{{todo.stateName}}</mat-card-subtitle>
       <p>{{todo.body}}</p>
-    </a>
-    <button class="delete" title="delete todo"
-            (click)="delete(todo)">x
-    </button>
-  </li>
-</ul>
+      <mat-card-actions align="end">
+        <a mat-raised-button routerLink="/todo/update/{{todo.id}}">編集</a>
+        <button mat-raised-button (click)="delete(todo)" color="warn">削除</button>
+      </mat-card-actions>
+    </mat-card>
+    <br>
+  </div>
+</section>

@@ -17,10 +17,15 @@ import {CategoryAddComponent}    from './component/category-add/category-add.com
 import {CategoryUpdateComponent} from './component/category-update/category-update.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTabsModule}           from "@angular/material/tabs";
+import {MatCardModule}           from "@angular/material/card";
+import {MatButtonModule}         from "@angular/material/button";
+import {MatChipsModule}          from "@angular/material/chips";
+import {MatDividerModule}        from "@angular/material/divider";
+import {MatToolbarModule}        from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [AppComponent, TodoListComponent, TodoAddComponent, TodoUpdateComponent, CategoryListComponent, CategoryAddComponent, CategoryUpdateComponent],
-  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot(), BrowserAnimationsModule, MatTabsModule],
+  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot(), BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule],
   providers:    [],
   bootstrap:    [AppComponent]
 })
