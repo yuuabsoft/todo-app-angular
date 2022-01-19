@@ -1,26 +1,26 @@
-import {Injectable}           from '@angular/core';
+import {Injectable}          from '@angular/core';
 import {
   HttpClient,
   HttpHeaders
-}                             from "@angular/common/http";
+}                            from "@angular/common/http";
 import {
   catchError,
   Observable,
   of,
   tap
-}                             from "rxjs";
-import {Category}             from "../model/Category";
-import {FlashMessagesService} from "flash-messages-angular";
-import {CategoryAddInput}     from "../model/CategoryAddInput";
-import {CategoryUpdateInput}  from "../model/CategoryUpdateInput";
-import {environment}          from "../../environments/environment";
+}                            from "rxjs";
+import {Category}            from "../model/Category";
+import {CategoryAddInput}    from "../model/CategoryAddInput";
+import {CategoryUpdateInput} from "../model/CategoryUpdateInput";
+import {environment}         from "../../environments/environment";
+import {MatSnackBar}         from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  constructor(private http: HttpClient, private flashMessagesService: FlashMessagesService) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
   }
 
   private categoryUrl = environment.apiUrl + '/api/category';
@@ -53,7 +53,7 @@ export class CategoryService {
   }
 
   private log(msg: string) {
-    this.flashMessagesService.show(msg);
+    this.snackBar.open(msg);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

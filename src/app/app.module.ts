@@ -11,7 +11,6 @@ import {
 import {HttpClientModule}        from "@angular/common/http";
 import {TodoAddComponent}        from './component/todo-add/todo-add.component';
 import {TodoUpdateComponent}     from './component/todo-update/todo-update.component';
-import {FlashMessagesModule}     from "flash-messages-angular";
 import {CategoryListComponent}   from './component/category-list/category-list.component';
 import {CategoryAddComponent}    from './component/category-add/category-add.component';
 import {CategoryUpdateComponent} from './component/category-update/category-update.component';
@@ -26,11 +25,18 @@ import {MatFormFieldModule}      from "@angular/material/form-field";
 import {MatInputModule}          from "@angular/material/input";
 import {MatSelectModule}         from "@angular/material/select";
 import {MatTableModule}          from "@angular/material/table";
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarModule
+}                                from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [AppComponent, TodoListComponent, TodoAddComponent, TodoUpdateComponent, CategoryListComponent, CategoryAddComponent, CategoryUpdateComponent],
-  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, FlashMessagesModule.forRoot(), BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule],
-  providers:    [],
+  imports:      [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, BrowserAnimationsModule, MatTabsModule, MatCardModule, MatButtonModule, MatChipsModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatTableModule, MatSnackBarModule],
+  providers:    [{
+    provide:  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+    useValue: {duration: 2000}
+  }],
   bootstrap:    [AppComponent]
 })
 export class AppModule {

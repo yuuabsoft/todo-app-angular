@@ -1,26 +1,26 @@
-import {Injectable}           from '@angular/core';
+import {Injectable}      from '@angular/core';
 import {
   HttpClient,
   HttpHeaders
-}                             from "@angular/common/http";
+}                        from "@angular/common/http";
 import {
   catchError,
   Observable,
   of,
   tap
-}                             from "rxjs";
-import {Todo}                 from "../model/Todo";
-import {TodoAddInput}         from "../model/TodoAddInput";
-import {TodoUpdateInput}      from "../model/TodoUpdateInput";
-import {FlashMessagesService} from "flash-messages-angular";
-import {environment}          from "../../environments/environment";
+}                        from "rxjs";
+import {Todo}            from "../model/Todo";
+import {TodoAddInput}    from "../model/TodoAddInput";
+import {TodoUpdateInput} from "../model/TodoUpdateInput";
+import {environment}     from "../../environments/environment";
+import {MatSnackBar}     from "@angular/material/snack-bar";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
 
-  constructor(private http: HttpClient, private flashMessagesService: FlashMessagesService) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
   }
 
   private todoUrl = environment.apiUrl + '/api/todo';
@@ -53,7 +53,7 @@ export class TodoService {
   }
 
   private log(msg: string) {
-    this.flashMessagesService.show(msg);
+    this.snackBar.open(msg);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
